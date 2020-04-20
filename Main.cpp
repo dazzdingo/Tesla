@@ -29,6 +29,7 @@ void SetUp(){
 
 void Draw(){
     system("cls"); //clearscreen
+    //make a frame
     for (int i = 0; i < width + 2; i++)
         cout << "x";
     cout << endl;
