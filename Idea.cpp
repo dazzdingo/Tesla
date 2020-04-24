@@ -23,7 +23,7 @@ void SetUp() {
     ElonY = rand() % height;
     PrizeX = rand() % width;
     PrizeY = rand() % height;
-    cout << x << " " << y<< " " << PrizeX << " " << PrizeY ;
+    cout << "You are starting at " << x << " - " << y << " - " << ElonX << " - " << ElonY;
 }
 
 
@@ -40,6 +40,7 @@ void Logic() {
                 cout << "you are getting out of the map" << endl;
                 y++;
             }
+            cout << "You are now at " << x << " - " << y << endl;
         }
         if (movement == 's') {
             y++;
@@ -47,6 +48,7 @@ void Logic() {
                 cout << "you are getting out of the map" << endl;
                 y--;
             }
+            cout << "You are now at " << x << " - " << y << endl;
         }
         if (movement == 'a') {
             x--;
@@ -54,13 +56,15 @@ void Logic() {
                 cout << "you are getting out of the map" << endl;
                 x++;
             }
+            cout << "You are now at " << x << " - " << y << endl;
         }
         if (movement == 'd') {
             x++;
-            if (x > 1) {
+            if (x > 15) {
                 cout << "you are getting out of the map" << endl;
                 x--;
             }
+            cout << "You are now at " << x << " - " << y << endl;
         }
         if (abs(x - PrizeX) < 3 ) 
             cout << "You are getting warmer horizontally" << endl;
@@ -70,9 +74,10 @@ void Logic() {
             cout << "you win" << endl;
             GameOver = true;
         }
-        if (ElonX == x && ElonY == y)
-            cout << "You have encountered Elon." << endl;
+        if (x == ElonX && y == ElonY) {
+            cout << "You have encountered Elon" << endl;
             break;
+        }
     }
     while (!GameOver) {
         cout << "Press w to go up, s to down, a to go left and d to go right. To stop the game press r" << endl;
@@ -85,6 +90,7 @@ void Logic() {
                 cout << "you are getting out of the map" << endl;
                 y++;
             }
+            cout << "You are now at " << x << " - " << y << endl;
         }
         if (movement == 's') {
             y++;
@@ -92,6 +98,7 @@ void Logic() {
                 cout << "you are getting out of the map" << endl;
                 y--;
             }
+            cout << "You are now at " << x << " - " << y << endl;
         }
         if (movement == 'a') {
             x--;
@@ -99,13 +106,15 @@ void Logic() {
                 cout << "you are getting out of the map" << endl;
                 x++;
             }
+            cout << "You are now at " << x << " - " << y << endl;
         }
         if (movement == 'd') {
             x++;
-            if (x > 1) {
+            if (x > 15) {
                 cout << "you are getting out of the map" << endl;
                 x--;
             }
+            cout << "You are now at " << x << " - " << y << endl;
         }
         ElonX = rand() % width;
         ElonY = rand() % height;
