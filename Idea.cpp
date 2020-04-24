@@ -23,53 +23,102 @@ void SetUp() {
     ElonY = rand() % height;
     PrizeX = rand() % width;
     PrizeY = rand() % height;
-    cout << x << " " << y<< " " << PrizeX << " " << PrizeY;
+    cout << x << " " << y<< " " << PrizeX << " " << PrizeY ;
 }
 
 
 void Logic() {
 
     while (!GameOver) {
-        cout << "Press w to go up, s to down, a to go left and d to go right. To stop the game press r";
+        cout << "Press w to go up, s to down, a to go left and d to go right. To stop the game press r" << endl;
         cin >> movement;
         if (movement == 'r')
             GameOver = true;
-        if (movement == 'w')
+        if (movement == 'w'){
             y--;
-        if (movement == 's')
+            if (y < 1) {
+                cout << "you are getting out of the map" << endl;
+                y++;
+            }
+        }
+        if (movement == 's') {
             y++;
-        if (movement == 'a')
+            if (y > 15) {
+                cout << "you are getting out of the map" << endl;
+                y--;
+            }
+        }
+        if (movement == 'a') {
             x--;
-        if (movement == 'd')
+            if (x < 1) {
+                cout << "you are getting out of the map" << endl;
+                x++;
+            }
+        }
+        if (movement == 'd') {
             x++;
+            if (x > 1) {
+                cout << "you are getting out of the map" << endl;
+                x--;
+            }
+        }
+        if (abs(x - PrizeX) < 3 ) 
+            cout << "You are getting warmer horizontally" << endl;
+        if (abs(y - PrizeY) < 3) 
+            cout << "You are getting warmer vertically" << endl;
         if (x == PrizeX && y == PrizeY) {
-            cout << "you win";
+            cout << "you win" << endl;
             GameOver = true;
         }
         if (ElonX == x && ElonY == y)
+            cout << "You have encountered Elon." << endl;
             break;
     }
     while (!GameOver) {
-        cout << "Press w to go up, s to down, a to go left and d to go right. To stop the game press r";
+        cout << "Press w to go up, s to down, a to go left and d to go right. To stop the game press r" << endl;
         cin >> movement;
         if (movement == 'r')
             GameOver = true;
-        if (movement == 'w')
+        if (movement == 'w') {
             y--;
-        if (movement == 's')
+            if (y < 1) {
+                cout << "you are getting out of the map" << endl;
+                y++;
+            }
+        }
+        if (movement == 's') {
             y++;
-        if (movement == 'a')
+            if (y > 15) {
+                cout << "you are getting out of the map" << endl;
+                y--;
+            }
+        }
+        if (movement == 'a') {
             x--;
-        if (movement == 'd')
+            if (x < 1) {
+                cout << "you are getting out of the map" << endl;
+                x++;
+            }
+        }
+        if (movement == 'd') {
             x++;
+            if (x > 1) {
+                cout << "you are getting out of the map" << endl;
+                x--;
+            }
+        }
         ElonX = rand() % width;
         ElonY = rand() % height;
+        if (abs(x - PrizeX) < 3)
+            cout << "You are getting warmer horizontally" << endl;
+        if (abs(y - PrizeY) < 3)
+            cout << "You are getting warmer vertically" << endl;
         if (x == PrizeX && y == PrizeY) {
             cout << "you win";
             GameOver = true;
         }
         if (x == ElonX && y == ElonY || x == YugoX && y == YugoY || x == PintoX && y == PintoY) {
-            cout << "You lose";
+            cout << "You lose" << endl;
             GameOver = true;
         }
     }
