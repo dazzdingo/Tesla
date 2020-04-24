@@ -23,7 +23,7 @@ void SetUp() {
     ElonY = rand() % height;
     PrizeX = rand() % width;
     PrizeY = rand() % height;
-    cout << "You are starting at " << x << " - " << y << " - " << ElonX << " - " << ElonY;
+    cout << "You are starting at " << x << " - " << y << " - " ;
 }
 
 
@@ -140,3 +140,5 @@ int main() {
     Logic();
 	return 0;
 }
+
+//Tesla Project of An and Trien
