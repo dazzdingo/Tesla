@@ -15,9 +15,10 @@ int cont;
 
 void UpdateBoard(int x, int y) {
     system("cls");
+    system("color f2");
     cout << "THE TESLA GAME" << endl;
     cout << "Main Objective: Find the Roadster, avoid Tesla! "
-            "There is also a Yugo and a Pinto in the game, try not to find them!" << endl;
+        "There is also a Yugo and a Pinto in the game, try not to find them!" << endl;
     cout << "Best of luck!" << endl;
     for (int xb = 0; xb < 15; xb++) {
         for (int yb = 0; yb < 15; yb++) {
@@ -36,6 +37,7 @@ void UpdateBoard(int x, int y) {
 
 void UpdateBoardAfterSeeElon(int x, int y) {
     system("cls");
+    system("color f2");
     for (int xb = 0; xb < 15; xb++) {
         for (int yb = 0; yb < 15; yb++) {
             matrix[xb][yb] = '-';
@@ -43,8 +45,6 @@ void UpdateBoardAfterSeeElon(int x, int y) {
     }
     matrix[x][y] = 'X';     //print player location
     matrix[ElonX][ElonY] = 'E';     //print Elon location
-    matrix[YugoX][YugoY] = 'Y';     //print Yugo location
-    matrix[PintoX][PintoY] = 'P';     //print Pinto location
     for (int xb = 0; xb < 15; xb++) {
         for (int yb = 0; yb < 15; yb++) {
             cout << setw(3) << matrix[xb][yb];
@@ -66,7 +66,7 @@ void SetUp() {
     PrizeX = rand() % width;
     PrizeY = rand() % height;
     UpdateBoard(x, y);
-    cout << "You are starting at " << x << " - " << y << " - " ;
+    cout << "You are starting at " << x << " - " << y << " - ";
 }
 
 
@@ -112,26 +112,28 @@ void Logic() {
             cout << "You are now at " << x << " - " << y << endl;
         }
         UpdateBoard(x, y);
-        if (abs(x - PrizeX) <= 3)
+        if (abs(x - PrizeX) <= 3 && abs(y - PrizeY) <= 5)
             cout << "You are getting warmer horizontally" << endl;
-        if (abs(y - PrizeY) <= 3)
+        if (abs(y - PrizeY) <= 3 && abs(x - PrizeX) <= 5)
             cout << "You are getting warmer vertically" << endl;
         if (x == PrizeX && y == PrizeY) {
             system("cls");
+            system("color f4");
             cout << "YOU FOUND THE ROADSTER." << endl;
             cout << "CONGRATULATION!!! YOU HAVE WON!!" << endl;
             GameOver = true;
         }
         if (x == ElonX && y == ElonY) {
             system("cls");
+            system("color f9");
             cout << "You have encountered Elon. Your only way out is to find the Roadster." << endl;
             cout << "They will give you 5 turns before chasing after you." << endl;
             cout << "Find the Roadster! Press any NUMBER to continue:" << endl;
             cin >> cont;
             Elon = 5;
-            while(ElonX == x)
+            while (ElonX == x)
                 ElonX = rand() % width;
-            while(ElonY == y)
+            while (ElonY == y)
                 ElonY = rand() % height;
             UpdateBoardAfterSeeElon(x, y);
             break;
@@ -139,7 +141,7 @@ void Logic() {
     }
 
     while (!GameOver) {
-        if (counter > Elon-1) {
+        if (counter > Elon - 1) {
             var = rand() % 2;
             if (var == 0) {
                 if (ElonX != x) {
@@ -263,14 +265,32 @@ void Logic() {
             cout << "You are getting warmer vertically" << endl;
         if (x == PrizeX && y == PrizeY) {
             system("cls");
+            system("color f4");
             cout << "YOU FOUND THE ROADSTER." << endl;
             cout << "CONGRATULATION!!! YOU HAVE WON!!" << endl;
             GameOver = true;
         }
-        if ((x == ElonX && y == ElonY) || (x == YugoX && y == YugoY) || (x == PintoX && y == PintoY)) {
+        if (x == ElonX && y == ElonY) {
             system("cls");
+            system("color f9");
             cout << "YOU ENCOUNTER ELON AGAIN! :(" << endl;
             cout << "BOOO!!! YOU LOSE!! :P" << endl;
+            GameOver = true;
+        }
+
+        if ( x == YugoX && y == YugoY ) {
+            system("cls");
+            system("color f9");
+            cout << "YOU ENCOUNTER YUGO! YOU HAVE BECOME A STAR MAN! :(" << endl;
+            cout << "BAD LUCK!!! YOU LOSE!! :P" << endl;
+            GameOver = true;
+        }
+
+        if (x == PintoX && y == PintoY) {
+            system("cls");
+            system("color f9");
+            cout << "YOU ENCOUNTER PINTO! YOU HAVE BECOME A STAR MAN! :(" << endl;
+            cout << "BAD LUCK!!! YOU LOSE!! :P" << endl;
             GameOver = true;
         }
         counter++;
