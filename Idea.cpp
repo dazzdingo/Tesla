@@ -26,7 +26,6 @@ void UpdateBoard(int x, int y) {
         }
     }
     matrix[x][y] = 'X';     //print player location
-    matrix[ElonX][ElonY] = 'E';
     for (int xb = 0; xb < 15; xb++) {
         for (int yb = 0; yb < 15; yb++) {
             cout << setw(3) << matrix[xb][yb];
