@@ -15,28 +15,30 @@ int cont;
 
 void UpdateBoard(int x, int y) {
     system("cls");
-    system("color f2");
+    system("color f0");
     cout << "THE TESLA GAME" << endl;
     cout << "Main Objective: Find the Roadster, avoid Tesla! "
         "There is also a Yugo and a Pinto in the game, try not to find them!" << endl;
-    cout << "Best of luck!" << endl;
+    cout << "Best of luck!" << endl << endl << endl;
     for (int xb = 0; xb < 15; xb++) {
         for (int yb = 0; yb < 15; yb++) {
             matrix[xb][yb] = '-';
         }
     }
     matrix[x][y] = 'X';     //print player location
+    matrix[ElonX][ElonY] = 'E';
     for (int xb = 0; xb < 15; xb++) {
         for (int yb = 0; yb < 15; yb++) {
             cout << setw(3) << matrix[xb][yb];
         }
         cout << endl;
     }
+    cout << endl << endl;
 }
 
 void UpdateBoardAfterSeeElon(int x, int y) {
     system("cls");
-    system("color f2");
+    system("color f3");
     for (int xb = 0; xb < 15; xb++) {
         for (int yb = 0; yb < 15; yb++) {
             matrix[xb][yb] = '-';
@@ -50,6 +52,7 @@ void UpdateBoardAfterSeeElon(int x, int y) {
         }
         cout << endl;
     }
+    cout << endl << endl;
 }
 
 void SetUp() {
@@ -84,7 +87,6 @@ void Logic() {
                 cout << "You are getting out of the map" << endl;
                 y++;
             }
-            cout << "You are now at " << x << " - " << y << endl;
         }
         if (movement == 'd') {
             y++;
@@ -92,7 +94,6 @@ void Logic() {
                 cout << "You are getting out of the map" << endl;
                 y--;
             }
-            cout << "You are now at " << x << " - " << y << endl;
         }
         if (movement == 'w') {
             x--;
@@ -100,7 +101,6 @@ void Logic() {
                 cout << "You are getting out of the map" << endl;
                 x++;
             }
-            cout << "You are now at " << x << " - " << y << endl;
         }
         if (movement == 's') {
             x++;
@@ -108,13 +108,45 @@ void Logic() {
                 cout << "You are getting out of the map" << endl;
                 x--;
             }
-            cout << "You are now at " << x << " - " << y << endl;
         }
+        if (movement == 'R')
+            GameOver = true;
+        if (movement == 'A') {
+            y--;
+            if (y < 0) {
+                cout << "You are getting out of the map" << endl;
+                y++;
+            }
+        }
+        if (movement == 'D') {
+            y++;
+            if (y > 14) {
+                cout << "You are getting out of the map" << endl;
+                y--;
+            }
+        }
+        if (movement == 'W') {
+            x--;
+            if (x < 0) {
+                x++;
+            }
+        }
+        if (movement == 'S') {
+            x++;
+            if (x > 14) {
+                cout << "You are getting out of the map" << endl;
+                x--;
+            }
+        }
+
+        cout << "You are now at " << x << " - " << y << endl;
         UpdateBoard(x, y);
+
         if (abs(x - PrizeX) <= 3 && abs(y - PrizeY) <= 5)
             cout << "You are getting warmer horizontally" << endl;
         if (abs(y - PrizeY) <= 3 && abs(x - PrizeX) <= 5)
             cout << "You are getting warmer vertically" << endl;
+
         if (x == PrizeX && y == PrizeY) {
             system("cls");
             system("color f4");
@@ -122,11 +154,12 @@ void Logic() {
             cout << "CONGRATULATION!!! YOU HAVE WON!!" << endl;
             GameOver = true;
         }
+
         if (x == ElonX && y == ElonY) {
             system("cls");
             system("color f9");
             cout << "You have encountered Elon. Your only way out is to find the Roadster." << endl;
-            cout << "They will give you 5 turns before chasing after you." << endl;
+            cout << "Hope you do not encounter Yugo or Pinto." << endl;
             cout << "Find the Roadster! Press any NUMBER to continue:" << endl;
             cin >> cont;
             Elon = 5;
@@ -140,6 +173,7 @@ void Logic() {
     }
 
     while (!GameOver) {
+
         if (counter > Elon - 1) {
             var = rand() % 2;
             if (var == 0) {
@@ -167,58 +201,6 @@ void Logic() {
                 }
             }
         }
-        if (counter > 5) {
-            if (var == 1) {
-                if (YugoX != x) {
-                    YugoX++;
-                    if (abs(YugoX - x) > abs(YugoX - 1 - x))
-                        YugoX = YugoX - 2;
-                }
-                else {
-                    YugoY++;
-                    if (abs(YugoY - y) > abs(YugoY - 1 - y))
-                        YugoY = YugoY - 2;
-                }
-            }
-            if (var == 0) {
-                if (YugoY != y) {
-                    YugoY++;
-                    if (abs(YugoY - y) > abs(YugoY - 1 - y))
-                        YugoY = YugoY - 2;
-                }
-                else {
-                    YugoX++;
-                    if (abs(YugoX - x) > abs(YugoX - 1 - x))
-                        YugoX = YugoX - 2;
-                }
-            }
-        }
-        if (counter > 5) {
-            if (var == 0) {
-                if (PintoX != x) {
-                    PintoX++;
-                    if (abs(PintoX - x) > abs(PintoX - 1 - x))
-                        PintoX = PintoX - 2;
-                }
-                else {
-                    PintoY++;
-                    if (abs(PintoY - y) > abs(PintoY - 1 - y))
-                        PintoY = PintoY - 2;
-                }
-            }
-            if (var == 1) {
-                if (PintoY != y) {
-                    PintoY++;
-                    if (abs(PintoY - y) > abs(PintoY - 1 - y))
-                        PintoY = PintoY - 2;
-                }
-                else {
-                    PintoX++;
-                    if (abs(PintoX - x) > abs(PintoX - 1 - x))
-                        PintoX = PintoX - 2;
-                }
-            }
-        }
 
         cout << "Press W to go up, S to down, A to go left and D to go right. To stop the game press R." << endl;
         cin >> movement;
@@ -231,7 +213,6 @@ void Logic() {
                 cout << "You are getting out of the map" << endl;
                 y++;
             }
-            cout << "You are now at " << x << " - " << y << endl;
         }
         if (movement == 'd') {
             y++;
@@ -239,15 +220,12 @@ void Logic() {
                 cout << "You are getting out of the map" << endl;
                 y--;
             }
-            cout << "You are now at " << x << " - " << y << endl;
         }
         if (movement == 'w') {
             x--;
             if (x < 0) {
-                cout << "You are getting out of the map" << endl;
                 x++;
             }
-            cout << "You are now at " << x << " - " << y << endl;
         }
         if (movement == 's') {
             x++;
@@ -255,8 +233,37 @@ void Logic() {
                 cout << "You are getting out of the map" << endl;
                 x--;
             }
-            cout << "You are now at " << x << " - " << y << endl;
         }
+        if (movement == 'R')
+            GameOver = true;
+        if (movement == 'A') {
+            y--;
+            if (y < 0) {
+                cout << "You are getting out of the map" << endl;
+                y++;
+            }
+        }
+        if (movement == 'D') {
+            y++;
+            if (y > 14) {
+                cout << "You are getting out of the map" << endl;
+                y--;
+            }
+        }
+        if (movement == 'W') {
+            x--;
+            if (x < 0) {
+                x++;
+            }
+        }
+        if (movement == 'S') {
+            x++;
+            if (x > 14) {
+                cout << "You are getting out of the map" << endl;
+                x--;
+            }
+        }
+        cout << "You are now at " << x << " - " << y << endl;
         UpdateBoard(x, y);
         if (abs(x - PrizeX) <= 3)
             cout << "You are getting warmer horizontally" << endl;
@@ -277,7 +284,7 @@ void Logic() {
             GameOver = true;
         }
 
-        if ( x == YugoX && y == YugoY ) {
+        if (x == YugoX && y == YugoY) {
             system("cls");
             system("color f9");
             cout << "YOU ENCOUNTER YUGO! YOU HAVE BECOME A STAR MAN! :(" << endl;
@@ -295,8 +302,6 @@ void Logic() {
         counter++;
     }
 }
-
-
 
 int main() {
     srand(time(NULL));
